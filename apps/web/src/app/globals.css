@@ -1,0 +1,348 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  --ruby-50: #fff1f2;
+  --ruby-100: #ffe4e6;
+  --ruby-200: #fecdd3;
+  --ruby-300: #fda4af;
+  --ruby-400: #fb7185;
+  --ruby-500: #f43f5e;
+  --ruby-600: #e11d48;
+  --ruby-700: #be123c;
+  --ruby-800: #9f1239;
+  --ruby-900: #881337;
+
+  --surface-soft: #fff8f8;
+  --surface-muted: #f8fafc;
+  --surface-dark: #101114;
+  --surface-deep: #09090b;
+
+  --ink-strong: #0f172a;
+  --ink-soft: #475569;
+  --ink-muted: #64748b;
+  --line-soft: rgba(15, 23, 42, 0.08);
+  --line-strong: rgba(15, 23, 42, 0.14);
+
+  --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 20px 60px rgba(15, 23, 42, 0.08);
+  --shadow-float: 0 28px 80px rgba(15, 23, 42, 0.14);
+  --shadow-ruby: 0 18px 42px rgba(225, 29, 72, 0.22);
+
+  --radius-card: 4px;
+  --radius-shell: 4px;
+  --radius-pill: 4px;
+
+  --selection-bg: rgba(225, 29, 72, 0.18);
+  --selection-fg: #4c0519;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-ruby-50: var(--ruby-50);
+  --color-ruby-100: var(--ruby-100);
+  --color-ruby-200: var(--ruby-200);
+  --color-ruby-300: var(--ruby-300);
+  --color-ruby-400: var(--ruby-400);
+  --color-ruby-500: var(--ruby-500);
+  --color-ruby-600: var(--ruby-600);
+  --color-ruby-700: var(--ruby-700);
+  --color-ruby-800: var(--ruby-800);
+  --color-ruby-900: var(--ruby-900);
+
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-float: var(--shadow-float);
+  --shadow-ruby: var(--shadow-ruby);
+
+  --radius-card: var(--radius-card);
+  --radius-shell: var(--radius-shell);
+  --radius-pill: var(--radius-pill);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgb(100 116 139 / 0.72);
+}
+
+:focus-visible {
+  outline: 3px solid rgb(225 29 72 / 0.28);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    font-family: var(--font-display);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    color: var(--ink-strong);
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3.75rem);
+  }
+
+  h3 {
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+  }
+
+  p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+}
+
+@layer utilities {
+  .bg-ruby-gradient {
+    background-image: linear-gradient(135deg, var(--ruby-700), var(--ruby-600));
+  }
+
+  .bg-ruby-surface {
+    background: linear-gradient(180deg, #ffffff 0%, var(--surface-soft) 100%);
+  }
+
+  .bg-premium-dark {
+    background: linear-gradient(180deg, #111318 0%, #0a0b0f 100%);
+  }
+
+  .border-soft {
+    border-color: var(--line-soft);
+  }
+
+  .border-strong {
+    border-color: var(--line-strong);
+  }
+
+  .shadow-premium {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-ruby {
+    box-shadow: var(--shadow-ruby);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .container-shell {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-shell {
+      padding-inline: 2rem;
+    }
+  }
+}
+
+@layer components {
+  .section-padding {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-padding {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .card-shell {
+    border: 1px solid var(--line-soft);
+    background: #ffffff;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .glass-shell {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: var(--radius-shell);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, var(--ruby-700), var(--ruby-600));
+    color: white;
+    font-weight: 700;
+    padding: 0.9rem 1.35rem;
+    box-shadow: var(--shadow-ruby);
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 22px 48px rgba(225, 29, 72, 0.26);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--line-strong);
+    background: white;
+    color: var(--ink-strong);
+    font-weight: 700;
+    padding: 0.9rem 1.35rem;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+    border-color: rgba(225, 29, 72, 0.25);
+    background: var(--ruby-50);
+  }
+
+  .input-shell {
+    width: 100%;
+    min-height: 3.35rem;
+    border-radius: 4px;
+    border: 1px solid var(--line-soft);
+    background: white;
+    padding-inline: 1rem;
+    color: var(--ink-strong);
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .input-shell:focus {
+    border-color: rgba(225, 29, 72, 0.28);
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.08);
+    outline: none;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--ruby-700);
+  }
+
+  .hero-booking-calendar .rdp-months {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+
+  .hero-booking-calendar .rdp-month {
+    min-width: 20rem;
+  }
+
+  .hero-booking-calendar .rdp-day_button {
+    font-weight: 600;
+  }
+
+  .hero-booking-calendar .rdp-selected .rdp-day_button,
+  .hero-booking-calendar .rdp-today .rdp-day_button,
+  .hero-booking-calendar-day-selected .rdp-day_button,
+  .hero-booking-calendar-day-today .rdp-day_button {
+    background: #dc2626 !important;
+    color: #000000 !important;
+    border-color: #dc2626 !important;
+  }
+}

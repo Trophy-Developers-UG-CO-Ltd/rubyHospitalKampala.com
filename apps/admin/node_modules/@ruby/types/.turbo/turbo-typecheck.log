@@ -1,0 +1,4 @@
+
+> @ruby/types@0.0.0 typecheck C:\Users\Luliba\Desktop\rubyHospitalKampala.com\packages\types
+> tsc --project tsconfig.json --noEmit
+

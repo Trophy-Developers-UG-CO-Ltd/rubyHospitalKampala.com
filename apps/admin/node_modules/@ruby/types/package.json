@@ -1,0 +1,14 @@
+{
+  "name": "@ruby/types",
+  "version": "0.0.0",
+  "description": "Shared types for Ruby Hospital Kampala apps",
+  "main": "types/index.ts",
+  "types": "types/index.ts",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --project tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

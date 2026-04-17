@@ -1,0 +1,13 @@
+{
+  "name": "@ruby/config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "tailwind.ts",
+  "types": "tailwind.ts",
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "typecheck": "tsc --project tsconfig.json --noEmit"
+  }
+}

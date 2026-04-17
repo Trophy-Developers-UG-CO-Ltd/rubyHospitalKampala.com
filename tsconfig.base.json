@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ruby/ui/*": [
+        "packages/ui/src/*"
+      ],
+      "@ruby/types": [
+        "packages/types/types/index.ts"
+      ],
+      "@ruby/types/*": [
+        "packages/types/types/*"
+      ],
+      "@ruby/config/*": [
+        "packages/config/*"
+      ],
+      "@ruby/api-client/*": [
+        "packages/api-client/src/*"
+      ],
+      "@ruby/api-client": [
+        "packages/api-client/src/index.ts"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "ruby-hospital-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "turbo": "^2.5.6",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,10 @@
+.env
+.env.local
+.env*.local
+dist
+node_modules
+coverage
+.eslintcache
+*.js
+!jest.config.js
+!typeorm.config.js

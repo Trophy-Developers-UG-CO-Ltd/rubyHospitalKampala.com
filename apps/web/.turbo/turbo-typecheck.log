@@ -1,0 +1,4 @@
+
+> @ruby/web@ typecheck C:\Users\Luliba\Desktop\rubyHospitalKampala.com\apps\web
+> tsc --project tsconfig.json --noEmit
+
