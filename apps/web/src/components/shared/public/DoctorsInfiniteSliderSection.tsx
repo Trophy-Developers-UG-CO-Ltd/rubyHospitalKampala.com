@@ -93,7 +93,7 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
 
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-white/10 pt-5">
           <Link
-            href="/en#home-booking-strip"
+            href={"/en#home-booking-strip" as Route}
             className="inline-flex items-center gap-2 rounded-[4px] bg-red-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
           >
             <CalendarDays className="h-4 w-4" />

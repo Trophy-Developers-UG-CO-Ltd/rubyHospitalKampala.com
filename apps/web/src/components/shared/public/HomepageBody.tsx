@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import {
@@ -568,7 +569,7 @@ export default function HomepageBody() {
               Specialist healthcare: 24/7 hospital delivering patient-centered care.
             </h1>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/en#home-booking-strip" className="btn-primary">
+              <Link href={"/en#home-booking-strip" as Route} className="btn-primary">
                 <CalendarDays className="h-4 w-4" />
                 Book Appointment
               </Link>

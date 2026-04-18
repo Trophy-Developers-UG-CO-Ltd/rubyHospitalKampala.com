@@ -89,7 +89,7 @@ export default function Header() {
             <Search className="h-4.5 w-4.5" />
           </button>
           <Link
-            href="/en#home-booking-strip"
+            href={"/en#home-booking-strip" as Route}
             className="inline-flex items-center gap-2 rounded-[4px] bg-red-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
           >
             <CalendarDays className="h-4 w-4" />
@@ -132,7 +132,7 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/en#home-booking-strip"
+              href={"/en#home-booking-strip" as Route}
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white"
             >
               <CalendarDays className="h-4 w-4" />
