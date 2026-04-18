@@ -17,7 +17,7 @@ type Doctor = {
   specialty: string;
   bio: string;
   image: StaticImageData;
-  href: Route;
+  href: string;
 };
 
 const doctors: Doctor[] = [
@@ -114,7 +114,7 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
             Make an appointment
           </Link>
 
-          <Link href={doctor.href} className="text-sm font-semibold text-white/84 transition hover:text-red-300">
+          <Link href={doctor.href as Route} className="text-sm font-semibold text-white/84 transition hover:text-red-300">
             View profile
           </Link>
         </div>
