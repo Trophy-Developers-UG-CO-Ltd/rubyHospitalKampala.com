@@ -629,7 +629,7 @@ export default function HomepageBody() {
             })}
           </motion.div>
           <div className="mt-5 flex justify-end">
-            <Link href="/en/departments" className="text-sm font-semibold text-red-600 hover:text-red-700">View all</Link>
+            <Link href="/en/specialties" className="text-sm font-semibold text-red-600 hover:text-red-700">View all</Link>
           </div>
         </div>
       </section>

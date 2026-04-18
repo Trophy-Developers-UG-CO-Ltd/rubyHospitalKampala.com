@@ -25,47 +25,47 @@ const departments: Department[] = [
   {
     title: "Paediatrics",
     image: paediatricsImage,
-    href: "/en/departments/paediatrics",
+    href: "/en/specialties/paediatrics",
   },
   {
     title: "Obstetrics & Gynaecology",
     image: obstetricsImage,
-    href: "/en/departments/obstetrics-gynaecology",
+    href: "/en/specialties/obstetrics-gynaecology",
   },
   {
     title: "Cardiology",
     image: cardiologyImage,
-    href: "/en/departments/cardiology",
+    href: "/en/specialties/cardiology",
   },
   {
     title: "Orthopaedics",
     image: orthopaedicsImage,
-    href: "/en/departments/orthopaedics",
+    href: "/en/specialties/orthopaedics",
   },
   {
     title: "Oncology",
     image: oncologyImage,
-    href: "/en/departments/oncology",
+    href: "/en/specialties/oncology",
   },
   {
     title: "Neurology",
     image: neurologyImage,
-    href: "/en/departments/neurology",
+    href: "/en/specialties/neurology",
   },
   {
     title: "Urology",
     image: urologyImage,
-    href: "/en/departments/urology",
+    href: "/en/specialties/urology",
   },
   {
     title: "ENT",
     image: entImage,
-    href: "/en/departments/ent",
+    href: "/en/specialties/ent",
   },
   {
     title: "General Surgery",
     image: surgeryImage,
-    href: "/en/departments/general-surgery",
+    href: "/en/specialties/general-surgery",
   },
 ];
 
@@ -139,7 +139,7 @@ export default function MedicalDepartmentsSection() {
 
         <div className="mt-6 flex justify-end">
           <Link
-            href="/en/departments"
+            href="/en/specialties"
             className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 transition hover:text-red-700"
           >
             See All <ArrowRight className="h-4 w-4" />
