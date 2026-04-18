@@ -82,14 +82,14 @@ export default function Footer() {
             {socials.map((item) => {
               const Icon = item.icon;
               return (
-                <Link
+                <a
                   key={item.label}
                   href={item.href}
                   aria-label={item.label}
                   className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-white/10 text-white/72 transition hover:border-red-500/30 hover:bg-red-500/10 hover:text-red-400"
                 >
                   <Icon className="h-4 w-4" />
-                </Link>
+                </a>
               );
             })}
           </div>
