@@ -2,6 +2,7 @@
 
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import type { Route } from "next";
 import { ArrowLeft, ArrowRight, CalendarDays, ShieldCheck, Stethoscope } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -16,7 +17,7 @@ type Doctor = {
   specialty: string;
   bio: string;
   image: StaticImageData;
-  href: string;
+  href: Route;
 };
 
 const doctors: Doctor[] = [
