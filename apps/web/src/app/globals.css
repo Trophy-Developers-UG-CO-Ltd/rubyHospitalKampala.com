@@ -1,5 +1,49 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "MTN Brighter Sans";
+  src:
+    url("../components/shared/public/font/MTN Brighter Sans Light.woff2") format("woff2"),
+    url("../components/shared/public/font/MTN Brighter Sans Light.woff") format("woff"),
+    url("../components/shared/public/font/MTN Brighter Sans Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MTN Brighter Sans";
+  src:
+    url("../components/shared/public/font/MTN Brighter Sans Medium.woff2") format("woff2"),
+    url("../components/shared/public/font/MTN Brighter Sans Medium.woff") format("woff"),
+    url("../components/shared/public/font/MTN Brighter Sans Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MTN Brighter Sans";
+  src:
+    url("../components/shared/public/font/MTN Brighter Sans Bold.woff2") format("woff2"),
+    url("../components/shared/public/font/MTN Brighter Sans Bold.woff") format("woff"),
+    url("../components/shared/public/font/MTN Brighter Sans Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MTN Brighter Sans";
+  src:
+    url("../components/shared/public/font/MTN Brighter Sans ExtraBold.woff2") format("woff2"),
+    url("../components/shared/public/font/MTN Brighter Sans ExtraBold.woff") format("woff"),
+    url("../components/shared/public/font/MTN Brighter Sans ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
@@ -54,8 +98,8 @@
   --color-ruby-800: var(--ruby-800);
   --color-ruby-900: var(--ruby-900);
 
-  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "MTN Brighter Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "MTN Brighter Sans", ui-sans-serif, system-ui, sans-serif;
 
   --shadow-soft: var(--shadow-soft);
   --shadow-card: var(--shadow-card);

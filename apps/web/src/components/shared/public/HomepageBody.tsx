@@ -5,9 +5,9 @@ import Link from "next/link";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 import {
-  ArrowRight,
   CalendarDays,
   CheckCircle2,
+  ChevronLeft,
   ChevronRight,
   HeartPulse,
   Hospital,
@@ -29,24 +29,9 @@ import {
   MapPin,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-
-const quickPanels = [
-  {
-    title: "Advanced Health Treatments",
-    description: "Coordinated diagnosis, specialist treatment, and continuity of care under one hospital system.",
-    href: "/en/departments",
-  },
-  {
-    title: "Schedule Your Appointment",
-    description: "Fast booking pathways, responsive support, and timely access to medical attention in Kampala.",
-    href: "/en/appointments",
-  },
-  {
-    title: "Consult Our Doctors",
-    description: "Meet experienced specialists in neurosurgery, urology, cardiology, paediatrics, orthopaedics, and more.",
-    href: "/en/doctors",
-  },
-];
+import MedicalDepartmentsSection from "./MedicalDepartmentsSection";
+import StatsParallaxSection from "./StatsParallaxSection";
+import DoctorsInfiniteSliderSection from "./DoctorsInfiniteSliderSection";
 
 const services = [
   { title: "Intensive Care Unit", icon: ShieldPlus },
@@ -100,6 +85,7 @@ const testimonials = [
 ];
 
 function HeroBookingBar() {
+  const frontendOnlyBooking = process.env.NEXT_PUBLIC_FRONTEND_ONLY_BOOKING !== "false";
   const [form, setForm] = useState({
     department: "",
     doctor: "Any Available Doctor",
@@ -201,34 +187,36 @@ function HeroBookingBar() {
     setSubmitError(null);
 
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-      const endpoint = apiBase
-        ? `${apiBase.replace(/\/+$/, "")}/appointments/bookings/public`
-        : "/api/v1/appointments/bookings/public";
+      if (!frontendOnlyBooking) {
+        const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+        const endpoint = apiBase
+          ? `${apiBase.replace(/\/+$/, "")}/appointments/bookings/public`
+          : "/api/v1/appointments/bookings/public";
 
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          department: form.department,
-          doctor: form.doctor,
-          appointmentDate: form.date,
-          fullName: form.fullName,
-          email: form.email,
-          phone: form.phone,
-          specialRequest: form.specialRequest,
-          source: "homepage-horizontal-strip",
-        }),
-      });
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            department: form.department,
+            doctor: form.doctor,
+            appointmentDate: form.date,
+            fullName: form.fullName,
+            email: form.email,
+            phone: form.phone,
+            specialRequest: form.specialRequest,
+            source: "homepage-horizontal-strip",
+          }),
+        });
 
-      if (!response.ok) {
-        const message = response.status >= 500
-          ? "Server error while submitting your booking."
-          : "Booking request failed. Please review your details and try again.";
-        setSubmitError(message);
-        return;
+        if (!response.ok) {
+          const message = response.status >= 500
+            ? "Server error while submitting your booking."
+            : "Booking request failed. Please review your details and try again.";
+          setSubmitError(message);
+          return;
+        }
       }
 
       setIsSuccess(true);
@@ -250,7 +238,7 @@ function HeroBookingBar() {
   }
 
   return (
-    <section className="relative z-20 bg-white">
+    <section id="home-booking-strip" className="relative z-20 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:mt-12 lg:mb-12 xl:px-8">
         <motion.form
           layout
@@ -487,7 +475,9 @@ function HeroBookingBar() {
                 style={{ borderRadius: "4px" }}
               >
                 <CheckCircle2 className="h-4 w-4" />
-                Your appointment request has been sent successfully.
+                {frontendOnlyBooking
+                  ? "Your appointment details were captured successfully. Our team will contact you shortly."
+                  : "Your appointment request has been sent successfully."}
               </motion.div>
             ) : null}
           </AnimatePresence>
@@ -517,6 +507,43 @@ function HeroBookingBar() {
 export default function HomepageBody() {
   const reduceMotion = useReducedMotion();
   const transition = { duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] as const };
+  const [servicesPage, setServicesPage] = useState(0);
+  const [servicesPerView, setServicesPerView] = useState(3);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const updateServicesPerView = () => {
+      setServicesPerView(mediaQuery.matches ? 6 : 3);
+    };
+
+    updateServicesPerView();
+    mediaQuery.addEventListener("change", updateServicesPerView);
+    return () => {
+      mediaQuery.removeEventListener("change", updateServicesPerView);
+    };
+  }, []);
+
+  const totalServicePages = Math.ceil(services.length / servicesPerView);
+  const visibleServiceItems = services.slice(
+    servicesPage * servicesPerView,
+    servicesPage * servicesPerView + servicesPerView,
+  );
+
+  useEffect(() => {
+    setServicesPage((prev) => Math.min(prev, Math.max(totalServicePages - 1, 0)));
+  }, [totalServicePages]);
+
+  function handlePreviousServicesPage() {
+    if (totalServicePages <= 1) return;
+    setServicesPage((prev) => (prev - 1 + totalServicePages) % totalServicePages);
+  }
+
+  function handleNextServicesPage() {
+    if (totalServicePages <= 1) return;
+    setServicesPage((prev) => (prev + 1) % totalServicePages);
+  }
 
   return (
     <main className="bg-white text-slate-950">
@@ -541,7 +568,7 @@ export default function HomepageBody() {
               Specialist healthcare: 24/7 hospital delivering patient-centered care.
             </h1>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/en/appointments" className="btn-primary">
+              <Link href="/en#home-booking-strip" className="btn-primary">
                 <CalendarDays className="h-4 w-4" />
                 Book Appointment
               </Link>
@@ -552,33 +579,39 @@ export default function HomepageBody() {
 
       <HeroBookingBar />
 
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 py-12 sm:px-6 lg:grid-cols-3 xl:px-8">
-        {quickPanels.map((item, i) => (
-          <motion.article
-            key={item.title}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ ...transition, delay: reduceMotion ? 0 : i * 0.06 }}
-            className="card-shell p-6"
-          >
-            <h3 className="text-lg font-semibold tracking-[-0.02em] text-slate-900">{item.title}</h3>
-            <p className="mt-2 text-sm leading-7 text-slate-600">{item.description}</p>
-            <Link href={item.href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-red-600 hover:text-red-700">
-              Learn more <ChevronRight className="h-4 w-4" />
-            </Link>
-          </motion.article>
-        ))}
-      </section>
-
       <section className="bg-slate-50 py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 xl:px-8">
           <div className="mb-7 flex items-center justify-between gap-4">
             <h2 className="text-3xl font-semibold tracking-[-0.03em] text-slate-900">Clinical Departments & Services</h2>
-            <Link href="/en/departments" className="text-sm font-semibold text-red-600 hover:text-red-700">View all</Link>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePreviousServicesPage}
+                disabled={totalServicePages <= 1}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-red-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-45"
+                aria-label="Previous services"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNextServicesPage}
+                disabled={totalServicePages <= 1}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition hover:border-red-300 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-45"
+                aria-label="Next services"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {services.map((service, i) => {
+          <motion.div
+            key={`${servicesPage}-${servicesPerView}`}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.28, ease: "easeOut" }}
+            className="grid grid-cols-3 gap-3 lg:grid-cols-6"
+          >
+            {visibleServiceItems.map((service, i) => {
               const Icon = service.icon;
               return (
                 <motion.div
@@ -589,14 +622,21 @@ export default function HomepageBody() {
                   transition={{ ...transition, delay: reduceMotion ? 0 : i * 0.03 }}
                   className="rounded-2xl border border-slate-200 bg-white p-4"
                 >
-                  <Icon className="h-5 w-5 text-red-600" />
+                  <Icon className="h-7 w-7 text-red-600 lg:h-8 lg:w-8" />
                   <p className="mt-3 text-sm font-medium text-slate-800">{service.title}</p>
                 </motion.div>
               );
             })}
+          </motion.div>
+          <div className="mt-5 flex justify-end">
+            <Link href="/en/departments" className="text-sm font-semibold text-red-600 hover:text-red-700">View all</Link>
           </div>
         </div>
       </section>
+
+      <MedicalDepartmentsSection />
+      <StatsParallaxSection />
+      <DoctorsInfiniteSliderSection />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 xl:px-8">
         <h2 className="text-3xl font-semibold tracking-[-0.03em] text-slate-900">Focused Advanced Care</h2>

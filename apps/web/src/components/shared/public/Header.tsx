@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Phone, Search, Globe2, ChevronDown, CalendarDays } from "lucide-react";
+import { Phone, Search, Globe2, ChevronDown, CalendarDays, UserRound } from "lucide-react";
 import { useState } from "react";
 
 const primaryNav = [
@@ -88,7 +88,7 @@ export default function Header() {
             <Search className="h-4.5 w-4.5" />
           </button>
           <Link
-            href="/en/appointments"
+            href="/en#home-booking-strip"
             className="inline-flex items-center gap-2 rounded-[4px] bg-red-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-700"
           >
             <CalendarDays className="h-4 w-4" />
@@ -96,13 +96,30 @@ export default function Header() {
           </Link>
         </div>
 
-        <button
-          aria-label="Open menu"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-slate-200 text-slate-700 md:hidden"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
+        <div className="inline-flex items-center gap-1.5 md:hidden">
+          <button
+            type="button"
+            aria-label="Language"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-slate-200 text-slate-700"
+          >
+            <Globe2 className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Account"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-slate-200 text-slate-700"
+          >
+            <UserRound className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Open menu"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-11 items-center justify-center rounded-[4px] border border-slate-200 px-3 text-[13px] font-semibold tracking-[0.08em] text-slate-700"
+          >
+            MENU
+          </button>
+        </div>
       </div>
 
       {open ? (
@@ -114,7 +131,7 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href="/en/appointments"
+              href="/en#home-booking-strip"
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white"
             >
               <CalendarDays className="h-4 w-4" />
