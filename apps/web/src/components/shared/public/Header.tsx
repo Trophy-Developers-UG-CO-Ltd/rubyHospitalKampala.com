@@ -30,9 +30,9 @@ export default function Header() {
               <Phone className="h-3.5 w-3.5" />
               +(256) 800-388111
             </span>
-            <Link href="mailto:info@rubyhospitalkampala.com" className="hover:text-red-600">
+            <a href="mailto:info@rubyhospitalkampala.com" className="hover:text-red-600">
               info@rubyhospitalkampala.com
-            </Link>
+            </a>
             <span>Plot 40 Lugogo By Pass</span>
           </div>
           <div className="flex items-center gap-5">
