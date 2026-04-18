@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Route } from "next";
 import { Facebook, Instagram, Linkedin, MapPin, Phone, Mail, Clock3 } from "lucide-react";
 
 const footerColumns = [
@@ -65,7 +66,7 @@ export default function Footer() {
             <ul className="mt-5 space-y-3">
               {column.links.map((item) => (
                 <li key={item}>
-                  <Link href={`/en/${slugify(item)}`} className="text-sm text-white/72 transition hover:text-red-400">
+                  <Link href={`/en/${slugify(item)}` as Route} className="text-sm text-white/72 transition hover:text-red-400">
                     {item}
                   </Link>
                 </li>

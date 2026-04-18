@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import type { Route } from "next";
 import { Phone, Search, Globe2, ChevronDown, CalendarDays, UserRound } from "lucide-react";
 import { useState } from "react";
 
@@ -38,7 +39,7 @@ export default function Header() {
             <Link href="/en/international-patients" className="hover:text-red-600">
               International Patients
             </Link>
-            <Link href="/en/insurance" className="hover:text-red-600">
+            <Link href={"/en/insurance" as Route} className="hover:text-red-600">
               Insurance Partners
             </Link>
             <button className="inline-flex items-center gap-1 hover:text-red-600">
@@ -65,7 +66,7 @@ export default function Header() {
             {primaryNav.map((item) => (
               <li key={item}>
                 <Link
-                  href={`/en/${slugify(item)}`}
+                  href={`/en/${slugify(item)}` as Route}
                   className="inline-flex rounded-[4px] px-3 py-2 text-[13px] font-medium text-slate-700 transition hover:bg-red-50 hover:text-red-600"
                 >
                   {item}
@@ -126,7 +127,7 @@ export default function Header() {
         <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden">
           <div className="grid gap-2">
             {primaryNav.map((item) => (
-              <Link key={item} href={`/en/${slugify(item)}`} className="rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+              <Link key={item} href={`/en/${slugify(item)}` as Route} className="rounded-xl px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
                 {item}
               </Link>
             ))}
