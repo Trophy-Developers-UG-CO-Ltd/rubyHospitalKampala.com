@@ -2,6 +2,7 @@
 
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
+import type { Route } from "next";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp } from "@/lib/utils/animations";
@@ -18,7 +19,7 @@ import surgeryImage from "./general-surgery.png";
 type Department = {
   title: string;
   image: StaticImageData;
-  href: string;
+  href: Route;
 };
 
 const departments: Department[] = [
