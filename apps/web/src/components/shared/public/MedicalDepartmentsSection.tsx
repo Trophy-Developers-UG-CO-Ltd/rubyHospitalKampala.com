@@ -19,7 +19,7 @@ import surgeryImage from "./general-surgery.png";
 type Department = {
   title: string;
   image: StaticImageData;
-  href: Route;
+  href: string;
 };
 
 const departments: Department[] = [
@@ -114,7 +114,7 @@ export default function MedicalDepartmentsSection() {
                 reducedDuration: 0,
               })}
             >
-              <Link href={department.href} className="block">
+              <Link href={department.href as Route} className="block">
                 <div className="relative aspect-[16/11] overflow-hidden">
                   <Image
                     src={department.image}
