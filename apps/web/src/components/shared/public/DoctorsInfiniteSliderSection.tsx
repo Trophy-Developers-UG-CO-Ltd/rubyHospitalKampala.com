@@ -6,6 +6,7 @@ import type { Route } from "next";
 import { ArrowLeft, ArrowRight, CalendarDays, ShieldCheck, Stethoscope } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { fadeUp } from "@/lib/utils/animations";
 import bilalImage from "./dr/Bilal Omer Hani.png";
 import darilImage from "./dr/Daril Arafet-DR ARAFET-p-500.png";
 import blessingImage from "./dr/Dr- BLESSING-TAREMWA-p-1080.jpeg";
@@ -57,21 +58,6 @@ const doctors: Doctor[] = [
     href: "/en/doctors/dr-ntambi-rogers",
   },
 ];
-
-function fadeUp(delay = 0, reduced = false) {
-  return reduced
-    ? {
-        initial: { opacity: 1, y: 0 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-      }
-    : {
-        initial: { opacity: 0, y: 24 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.55, ease: "easeOut", delay },
-      };
-}
 
 function DoctorCard({ doctor }: { doctor: Doctor }) {
   return (
@@ -178,7 +164,7 @@ export default function DoctorsInfiniteSliderSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 xl:px-8">
         <motion.div
           className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
-          {...fadeUp(0, !!reduceMotion)}
+          {...fadeUp(0, !!reduceMotion, { amount: 0.2, distance: 24, duration: 0.55 })}
         >
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-red-400">Our Experts</p>

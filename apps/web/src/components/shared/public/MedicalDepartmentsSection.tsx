@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { fadeUp } from "@/lib/utils/animations";
 import paediatricsImage from "./Paediatrics.png";
 import obstetricsImage from "./obstetricsGynecology.png";
 import cardiologyImage from "./Cardiology.png";
@@ -68,22 +69,6 @@ const departments: Department[] = [
   },
 ];
 
-function fadeUp(delay = 0, reduced = false) {
-  return reduced
-    ? {
-        initial: { opacity: 1, y: 0 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0 },
-      }
-    : {
-        initial: { opacity: 0, y: 24 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.18 },
-        transition: { duration: 0.55, ease: "easeOut", delay },
-      };
-}
-
 export default function MedicalDepartmentsSection() {
   const reduceMotion = useReducedMotion();
 
@@ -93,7 +78,12 @@ export default function MedicalDepartmentsSection() {
         <motion.div
           className="grid gap-6 border border-slate-200 bg-white p-6 shadow-[0_20px_60px_rgba(15,23,42,0.06)] md:grid-cols-[0.95fr_1.05fr] md:items-end lg:p-8"
           style={{ borderRadius: "4px" }}
-          {...fadeUp(0, !!reduceMotion)}
+          {...fadeUp(0, !!reduceMotion, {
+            amount: 0.18,
+            distance: 24,
+            duration: 0.55,
+            reducedDuration: 0,
+          })}
         >
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-red-600">
@@ -116,7 +106,12 @@ export default function MedicalDepartmentsSection() {
               key={department.title}
               className="group overflow-hidden border border-slate-200 bg-white"
               style={{ borderRadius: "4px" }}
-              {...fadeUp(0.04 * (index + 1), !!reduceMotion)}
+              {...fadeUp(0.04 * (index + 1), !!reduceMotion, {
+                amount: 0.18,
+                distance: 24,
+                duration: 0.55,
+                reducedDuration: 0,
+              })}
             >
               <Link href={department.href} className="block">
                 <div className="relative aspect-[16/11] overflow-hidden">

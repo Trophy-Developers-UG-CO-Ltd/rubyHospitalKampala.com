@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import { fadeUp } from "@/lib/utils/animations";
 import aboutParallaxImage from "./rubyhospitalkampala-about-2048x1365.webp";
 
 const stats = [
@@ -26,21 +27,6 @@ const stats = [
   },
 ];
 
-function fadeUp(delay = 0, reduced = false) {
-  return reduced
-    ? {
-        initial: { opacity: 1, y: 0 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-      }
-    : {
-        initial: { opacity: 0, y: 30 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.6, ease: "easeOut", delay },
-      };
-}
-
 export default function StatsParallaxSection() {
   const reduceMotion = useReducedMotion();
 
@@ -58,7 +44,7 @@ export default function StatsParallaxSection() {
           {stats.map((stat, i) => (
             <motion.div
               key={stat.title}
-              {...fadeUp(i * 0.1, !!reduceMotion)}
+              {...fadeUp(i * 0.1, !!reduceMotion, { amount: 0.2, distance: 30, duration: 0.6 })}
               className="border border-white/10 bg-white/5 p-6 text-white backdrop-blur-md"
               style={{ borderRadius: "4px" }}
             >
